@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lunavis Co., Ltd.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+
+  <style>
+    :root {
+      --black: #0b0b0b;
+      --white: #ffffff;
+      --yellow: #f5b400;
+      --gray: #9a9a9a;
+      --darkgray: #111;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.8;
+    }
+
+    a {
+      color: var(--yellow);
+      text-decoration: none;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      z-index: 100;
+    }
+
+    header .logo {
+      font-weight: bold;
+      letter-spacing: 0.05em;
+    }
+
+    nav a {
+      margin-left: 30px;
+      font-weight: bold;
+      color: var(--yellow);
+    }
+
+    nav a:hover {
+      color: var(--white);
+      border-bottom: 1px solid var(--yellow);
+    }
+
+    /* ===== HERO / SLIDER ===== */
+    .swiper {
+      height: 100vh;
+    }
+
+    .swiper-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(180deg, #000 0%, #111 100%);
+      padding: 0 20px;
+    }
+
+    .hero-text h1 {
+      font-size: 42px;
+      margin-bottom: 20px;
+    }
+
+    .hero-text span {
+      color: var(--yellow);
+    }
+
+    /* ===== SECTION ===== */
+    section {
+      padding: 120px 10%;
+    }
+
+    h2 {
+      color: var(--yellow);
+      font-size: 32px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--yellow);
+      display: inline-block;
+      padding-bottom: 10px;
+    }
+
+    /* ===== ABOUT ===== */
+    .about p {
+      max-width: 900px;
+    }
+
+    /* ===== PRODUCTS ===== */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .product {
+      background: var(--darkgray);
+      padding: 30px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+    }
+
+    .product h3 {
+      margin-bottom: 20px;
+    }
+
+    .product a {
+      display: inline-block;
+      margin: 8px 0;
+      padding: 10px 20px;
+      border: 1px solid var(--yellow);
+      color: var(--yellow);
+      font-size: 14px;
+    }
+
+    .product a:hover {
+      background: var(--yellow);
+      color: var(--black);
+    }
+
+    /* ===== CONTACT ===== */
+    form {
+      max-width: 600px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      background: #000;
+      border: 1px solid #333;
+      color: var(--white);
+    }
+
+    button {
+      padding: 12px 30px;
+      background: transparent;
+      border: 1px solid var(--yellow);
+      color: var(--yellow);
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: var(--yellow);
+      color: var(--black);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 40px;
+      text-align: center;
+      color: var(--gray);
+      font-size: 14px;
+      border-top: 1px solid #222;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Lunavis Co., Ltd.</div>
+  <nav>
+    <a href="#about">ABOUT</a>
+    <a href="#product">PRODUCT</a>
+    <a href="#news">NEWS</a>
+    <a href="#contact">CONTACT</a>
+  </nav>
+</header>
+
+<!-- HERO SLIDER -->
+<div class="swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <div class="hero-text">
+        <h1>遊びながら、<span>刑法</span>を思考する。</h1>
+        <p>法律 × 教育 × ゲーム</p>
+      </div>
+    </div>
+    <div class="swiper-slide">
+      <div class="hero-text">
+        <h1><span>考える力</span>を、ゲームで。</h1>
+        <p>Learning through Play</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <h2>ABOUT</h2>
+  <p>
+    ルナヴィス株式会社（Lunavis Co., Ltd.）は、  
+    ゲーム・教育・法律分野を横断するコンテンツを通じて、  
+    思考力・判断力・対話力を育てることを目的とした事業を行っています。
+    <br><br>
+    ゲーム関連コンテンツ、教材・書籍・デジタルコンテンツの企画制作、  
+    ワークショップや講演会の開催、教育事業の企画運営など、  
+    遊びと学びを結びつける取り組みを行っています。
+  </p>
+</section>
+
+<!-- PRODUCT -->
+<section id="product">
+  <h2>PRODUCT</h2>
+  <div class="products">
+    <div class="product">
+      <h3>刑法ポーカー</h3>
+      <a href="https://utcoopgoods.com/item-detail/1745141" target="_blank">公式商品ページ</a><br>
+      <a href="https://www.amazon.co.jp/dp/B088Q6RDWV" target="_blank">Amazon</a><br>
+      <a href="https://suppe.sugorokuya.jp/items/200133" target="_blank">すごろく屋</a>
+    </div>
+
+    <div class="product">
+      <h3>刑法ポーカー2</h3>
+      <a href="https://www.amazon.co.jp/" target="_blank">Amazon</a>
+    </div>
+
+    <div class="product">
+      <h3>瞬間認否</h3>
+      <a href="#">準備中</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>CONTACT</h2>
+  <form>
+    <input type="text" placeholder="お名前" required>
+    <input type="email" placeholder="メールアドレス" required>
+    <textarea rows="5" placeholder="お問い合わせ内容"></textarea>
+    <button type="submit">送信</button>
+  </form>
+</section>
+
+<footer>
+  © Lunavis Co., Ltd.
+</footer>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+  new Swiper('.swiper', {
+    loop: true,
+    autoplay: {
+      delay: 4000,
+    },
+    effect: 'fade',
+  });
+</script>
+
+</body>
+</html>
