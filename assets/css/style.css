@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  font-family: sans-serif;
+}
+
+/* ===== HEADER ===== */
+.header {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.menu-btn {
+  position: absolute;
+  left: 16px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #fff;
+}
+
+.logo img {
+  height: 32px;
+}
+
+/* ===== MENU ===== */
+.menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 70%;
+  height: 100%;
+  background: #111;
+  padding: 80px 20px;
+  transition: 0.3s;
+  z-index: 10;
+}
+
+.menu.open {
+  left: 0;
+}
+
+.menu a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 24px;
+  font-size: 18px;
+}
+
+/* ===== SLIDER ===== */
+.slider {
+  width: 100vw;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+
+.slide {
+  width: 100vw;
+  height: auto;
+  flex-shrink: 0;
+}
+
+/* ===== SECTIONS ===== */
+section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+h2 {
+  color: #f5c400;
+  margin-bottom: 16px;
+}
+
+.list {
+  list-style: none;
+}
+
+.list li {
+  margin-bottom: 8px;
+}
+
+/* ===== CONTACT ===== */
+.contact-form {
+  max-width: 400px;
+  margin: auto;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 8px;
+}
+
+.contact-form button {
+  padding: 10px 20px;
+}
