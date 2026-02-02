@@ -6,36 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
-    :root {
-      --bg-black: #000;
-      --text-white: #fff;
-      --accent-yellow: #f5c400;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
-      background: var(--bg-black);
-      color: var(--text-white);
-      line-height: 1.8;
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
-    /* ===== Header ===== */
+    /* ===== HEADER ===== */
     header {
       position: fixed;
       top: 0;
       width: 100%;
-      height: 64px;
+      height: 60px;
       background: #000;
       display: flex;
       align-items: center;
@@ -44,48 +29,39 @@
       border-bottom: 1px solid #222;
     }
 
-    .menu-button {
+    .menu-btn {
       position: absolute;
-      left: 16px;
-      font-size: 28px;
+      left: 20px;
+      font-size: 24px;
       cursor: pointer;
     }
 
     .logo img {
-      height: 36px;
+      height: 32px;
     }
 
-    /* ===== Menu ===== */
+    /* ===== MENU ===== */
     nav {
       position: fixed;
-      top: 64px;
+      top: 60px;
       left: 0;
       width: 100%;
       background: #000;
       display: none;
       flex-direction: column;
       border-bottom: 1px solid #222;
+      z-index: 999;
     }
 
     nav a {
       padding: 16px;
       border-top: 1px solid #222;
       text-align: center;
-      font-weight: bold;
     }
 
-    nav a:hover {
-      background: #111;
-      color: var(--accent-yellow);
-    }
-
-    nav.active {
-      display: flex;
-    }
-
-    /* ===== Slider ===== */
+    /* ===== SLIDER ===== */
     .slider {
-      margin-top: 64px;
+      margin-top: 60px;
       position: relative;
       overflow: hidden;
       height: 70vh;
@@ -93,104 +69,53 @@
 
     .slides {
       display: flex;
+      width: 300%;
       transition: transform 0.6s ease;
-      height: 100%;
     }
 
-    .slide {
-      min-width: 100%;
-      height: 100%;
-    }
-
-    .slide img {
+    .slides img {
       width: 100%;
-      height: 100%;
       object-fit: cover;
     }
 
-    .slider-buttons {
+    .arrow {
       position: absolute;
       top: 50%;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
       transform: translateY(-50%);
-    }
-
-    .slider-buttons span {
-      font-size: 32px;
-      padding: 0 16px;
+      font-size: 30px;
       cursor: pointer;
-      user-select: none;
+      padding: 10px;
     }
 
-    /* ===== Sections ===== */
+    .arrow.left { left: 10px; }
+    .arrow.right { right: 10px; }
+
+    /* ===== SECTION ===== */
     section {
-      padding: 80px 16px;
-      max-width: 960px;
+      padding: 80px 20px;
+      max-width: 900px;
       margin: auto;
     }
 
-    section h2 {
-      font-size: 28px;
-      margin-bottom: 24px;
-      color: var(--accent-yellow);
+    h2 {
       text-align: center;
-    }
-
-    /* ===== Products ===== */
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 24px;
-    }
-
-    .product {
-      border: 1px solid #222;
-      padding: 16px;
-      text-align: center;
-    }
-
-    /* ===== Contact ===== */
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    input, textarea {
-      padding: 12px;
-      background: #111;
-      border: 1px solid #333;
-      color: #fff;
-    }
-
-    button {
-      padding: 12px;
-      background: var(--accent-yellow);
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    footer {
-      text-align: center;
-      padding: 40px 0;
-      font-size: 14px;
-      border-top: 1px solid #222;
+      color: #f5c400;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 
 <body>
 
+<!-- ===== HEADER ===== -->
 <header>
-  <div class="menu-button" onclick="toggleMenu()">☰</div>
-  <div class="logo">
-    <a href="#"><img src="assets/images/logo.png" alt="Lunavis"></a>
-  </div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <a href="./index.html" class="logo">
+    <img src="./assets/images/logo.png" alt="Lunavis">
+  </a>
 </header>
 
+<!-- ===== MENU ===== -->
 <nav id="menu">
   <a href="#about" onclick="toggleMenu()">ABOUT</a>
   <a href="#news" onclick="toggleMenu()">NEWS</a>
@@ -198,19 +123,18 @@
   <a href="#contact" onclick="toggleMenu()">CONTACT</a>
 </nav>
 
-<!-- Slider -->
+<!-- ===== SLIDER ===== -->
 <div class="slider">
   <div class="slides" id="slides">
-    <div class="slide"><img src="assets/images/slide-01.jpg"></div>
-    <div class="slide"><img src="assets/images/slide-02.jpg"></div>
-    <div class="slide"><img src="assets/images/slide-03.jpg"></div>
+    <img src="./assets/images/slide-01.png" alt="">
+    <img src="./assets/images/slide-02.png" alt="">
+    <img src="./assets/images/slide-03.png" alt="">
   </div>
-  <div class="slider-buttons">
-    <span onclick="prevSlide()">‹</span>
-    <span onclick="nextSlide()">›</span>
-  </div>
+  <div class="arrow left" onclick="prevSlide()">‹</div>
+  <div class="arrow right" onclick="nextSlide()">›</div>
 </div>
 
+<!-- ===== ABOUT ===== -->
 <section id="about">
   <h2>ABOUT</h2>
   <p>
@@ -219,56 +143,49 @@
   </p>
 </section>
 
+<!-- ===== NEWS ===== -->
 <section id="news">
   <h2>NEWS</h2>
-  <p>最新情報は順次公開予定です。</p>
+  <p>最新情報は順次お知らせします。</p>
 </section>
 
+<!-- ===== PRODUCTS ===== -->
 <section id="products">
   <h2>PRODUCTS</h2>
-  <div class="products">
-    <div class="product">刑法ポーカー</div>
-    <div class="product">刑法ポーカー2</div>
-    <div class="product">瞬間認否</div>
-  </div>
+  <ul>
+    <li>刑法ポーカー</li>
+    <li>刑法ポーカー2</li>
+    <li>瞬間認否</li>
+  </ul>
 </section>
 
+<!-- ===== CONTACT ===== -->
 <section id="contact">
   <h2>CONTACT</h2>
-  <form>
-    <input type="text" placeholder="お名前">
-    <input type="email" placeholder="メールアドレス">
-    <textarea rows="4" placeholder="お問い合わせ内容"></textarea>
-    <button type="submit">送信</button>
-  </form>
+  <p>お問い合わせはフォームよりお願いいたします。</p>
 </section>
-
-<footer>
-  © Lunavis Co., Ltd.
-</footer>
 
 <script>
   const menu = document.getElementById("menu");
   function toggleMenu() {
-    menu.classList.toggle("active");
+    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
   }
 
   let index = 0;
   const slides = document.getElementById("slides");
-  const total = slides.children.length;
 
-  function showSlide(i) {
-    slides.style.transform = `translateX(-${i * 100}%)`;
+  function showSlide() {
+    slides.style.transform = `translateX(-${index * 100}%)`;
   }
 
   function nextSlide() {
-    index = (index + 1) % total;
-    showSlide(index);
+    index = (index + 1) % 3;
+    showSlide();
   }
 
   function prevSlide() {
-    index = (index - 1 + total) % total;
-    showSlide(index);
+    index = (index + 2) % 3;
+    showSlide();
   }
 
   setInterval(nextSlide, 5000);
