@@ -1,32 +1,26 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <title>Lunavis Co., Ltd.</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>Lunavis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
     body {
       margin: 0;
       background: #000;
       color: #fff;
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial;
+      font-family: sans-serif;
     }
 
-    a { color: inherit; text-decoration: none; }
-
-    /* ===== HEADER ===== */
+    /* ===== ヘッダー ===== */
     header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      height: 60px;
-      background: #000;
+      height: 64px;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 1000;
-      border-bottom: 1px solid #222;
+      position: relative;
+      border-bottom: 1px solid #333;
     }
 
     .menu-btn {
@@ -36,69 +30,62 @@
       cursor: pointer;
     }
 
-    .logo img {
+    header img {
       height: 32px;
     }
 
-    /* ===== MENU ===== */
+    /* ===== メニュー ===== */
     nav {
+      display: none;
       position: fixed;
-      top: 60px;
+      top: 64px;
       left: 0;
       width: 100%;
       background: #000;
-      display: none;
-      flex-direction: column;
-      border-bottom: 1px solid #222;
-      z-index: 999;
+      border-top: 1px solid #333;
+      z-index: 100;
     }
 
     nav a {
+      display: block;
       padding: 16px;
-      border-top: 1px solid #222;
-      text-align: center;
+      border-bottom: 1px solid #222;
+      color: #fff;
+      text-decoration: none;
     }
 
-    /* ===== SLIDER ===== */
+    /* ===== スライダー ===== */
     .slider {
-      margin-top: 60px;
+      width: 100%;
+      height: 60vh;
       position: relative;
       overflow: hidden;
-      height: 70vh;
     }
 
-    .slides {
-      display: flex;
-      width: 300%;
-      transition: transform 0.6s ease;
-    }
-
-    .slides img {
-      width: 100%;
-      object-fit: cover;
-    }
-
-    .arrow {
+    .slide {
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 30px;
-      cursor: pointer;
-      padding: 10px;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1s;
     }
 
-    .arrow.left { left: 10px; }
-    .arrow.right { right: 10px; }
+    .slide.active {
+      opacity: 1;
+    }
 
-    /* ===== SECTION ===== */
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* ★これが超重要 */
+    }
+
+    /* ===== セクション ===== */
     section {
       padding: 80px 20px;
-      max-width: 900px;
-      margin: auto;
+      text-align: center;
     }
 
     h2 {
-      text-align: center;
       color: #f5c400;
       margin-bottom: 20px;
     }
@@ -107,15 +94,13 @@
 
 <body>
 
-<!-- ===== HEADER ===== -->
 <header>
   <div class="menu-btn" onclick="toggleMenu()">☰</div>
-  <a href="./index.html" class="logo">
-    <img src="./assets/images/logo.png" alt="Lunavis">
+  <a href="index.html">
+    <img src="assets/images/logo.png" alt="logo">
   </a>
 </header>
 
-<!-- ===== MENU ===== -->
 <nav id="menu">
   <a href="#about" onclick="toggleMenu()">ABOUT</a>
   <a href="#news" onclick="toggleMenu()">NEWS</a>
@@ -123,72 +108,48 @@
   <a href="#contact" onclick="toggleMenu()">CONTACT</a>
 </nav>
 
-<!-- ===== SLIDER ===== -->
+<!-- スライダー -->
 <div class="slider">
-  <div class="slides" id="slides">
-    <img src="./assets/images/slide-01.png" alt="">
-    <img src="./assets/images/slide-02.png" alt="">
-    <img src="./assets/images/slide-03.png" alt="">
-  </div>
-  <div class="arrow left" onclick="prevSlide()">‹</div>
-  <div class="arrow right" onclick="nextSlide()">›</div>
+  <div class="slide active"><img src="assets/images/slide-01.png"></div>
+  <div class="slide"><img src="assets/images/slide-02.png"></div>
+  <div class="slide"><img src="assets/images/slide-03.png"></div>
 </div>
 
-<!-- ===== ABOUT ===== -->
 <section id="about">
   <h2>ABOUT</h2>
-  <p>
-    ルナヴィス株式会社（Lunavis Co., Ltd.）は、<br>
-    法律と教育をテーマにしたゲーム・教材・コンテンツを企画・制作する企業です。
-  </p>
+  <p>ルナヴィス株式会社（Lunavis Co., Ltd.）は、<br>
+  法律と教育をテーマにしたゲーム・教材・コンテンツを企画・制作する企業です。</p>
 </section>
 
-<!-- ===== NEWS ===== -->
 <section id="news">
   <h2>NEWS</h2>
-  <p>最新情報は順次お知らせします。</p>
+  <p>最新情報を掲載します。</p>
 </section>
 
-<!-- ===== PRODUCTS ===== -->
 <section id="products">
   <h2>PRODUCTS</h2>
-  <ul>
-    <li>刑法ポーカー</li>
-    <li>刑法ポーカー2</li>
-    <li>瞬間認否</li>
-  </ul>
+  <p>プロダクト紹介。</p>
 </section>
 
-<!-- ===== CONTACT ===== -->
 <section id="contact">
   <h2>CONTACT</h2>
-  <p>お問い合わせはフォームよりお願いいたします。</p>
+  <p>お問い合わせはこちら。</p>
 </section>
 
 <script>
-  const menu = document.getElementById("menu");
   function toggleMenu() {
-    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    const menu = document.getElementById('menu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
   }
 
+  const slides = document.querySelectorAll('.slide');
   let index = 0;
-  const slides = document.getElementById("slides");
 
-  function showSlide() {
-    slides.style.transform = `translateX(-${index * 100}%)`;
-  }
-
-  function nextSlide() {
-    index = (index + 1) % 3;
-    showSlide();
-  }
-
-  function prevSlide() {
-    index = (index + 2) % 3;
-    showSlide();
-  }
-
-  setInterval(nextSlide, 5000);
+  setInterval(() => {
+    slides[index].classList.remove('active');
+    index = (index + 1) % slides.length;
+    slides[index].classList.add('active');
+  }, 4000);
 </script>
 
 </body>
