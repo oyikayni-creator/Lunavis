@@ -43,41 +43,77 @@ img { max-width: 100%; display: block; }
   padding: 0 40px;
 }
 
-/* OPENING ANIMATION */
-#opening {
+/* ── LOADING SCREEN ── */
+.loading-screen {
   position: fixed;
   inset: 0;
-  background: var(--ink);
   z-index: 9999;
+  background: var(--bg);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 1s ease, visibility 1s;
+  transition: opacity 0.5s ease, visibility 1.5s ease;
 }
 
-#opening.fade-out {
+.loading-screen.done {
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
 }
 
-.opening-logo {
+.loading-logo-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.loading-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  animation: loadingFloat 1.8s ease-in-out infinite, loadingFadeIn 0.6s ease forwards;
+  opacity: 0;
+}
+
+.loading-brand {
   font-family: 'Outfit', sans-serif;
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--white);
-  letter-spacing: 0.2em;
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--ink);
+  letter-spacing: 0.08em;
+  opacity: 0;
+  animation: loadingFadeIn 0.5s ease 0.3s forwards;
+}
+
+.loading-bar-track {
+  width: 160px;
+  height: 3px;
+  background: var(--border);
+  border-radius: 3px;
   overflow: hidden;
+  opacity: 0;
+  animation: loadingFadeIn 0.4s ease 0.5s forwards;
 }
 
-.opening-logo span {
-  display: inline-block;
-  transform: translateY(100%);
-  animation: slideUp 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+.loading-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--ink);
+  border-radius: 3px;
+  transition: width 0.3s ease;
 }
 
-@keyframes slideUp {
-  to { transform: translateY(0); }
+@keyframes loadingFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
+
+@keyframes loadingFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 
 /* HEADER - センターロゴ構成 */
 header {
@@ -114,80 +150,150 @@ header {
   width: auto;
 }
 
-/* NAV - 左右に配置されるリンク（PC用） */
-.nav-desktop {
-  position: absolute;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  pointer-events: none;
-}
-
-.nav-desktop a {
-  pointer-events: auto;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  color: var(--text-light);
-}
-
-/* HAMBURGER MENU */
-.menu-trigger {
-  position: absolute;
-  right: 0;
-  width: 30px;
-  height: 30px;
+/* ── HAMBURGER MENU ── */
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 6px;
-  z-index: 1100;
+  padding: 6px;
+  z-index: 1001;
+  position: relative;
 }
 
-.menu-trigger span {
+.nav-hamburger span {
   display: block;
-  width: 100%;
+  width: 20px;
   height: 2px;
   background: var(--ink);
-  transition: 0.3s;
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
 }
 
-.menu-trigger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-.menu-trigger.active span:nth-child(2) { opacity: 0; }
-.menu-trigger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+.nav-hamburger span + span {
+  margin-top: 5px;
+}
 
-/* MOBILE NAV OVERLAY */
-.nav-mobile {
+.nav-hamburger.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-hamburger.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.mobile-menu {
   position: fixed;
   inset: 0;
-  background: var(--white);
-  z-index: 1050;
+  background: rgba(250,250,248,0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.mobile-menu.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu-close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: none;
+  border: none;
+  font-size: 2.2rem;
+  color: var(--ink);
+  cursor: pointer;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+  z-index: 1001;
+  line-height: 1;
+}
+
+.mobile-menu-close:hover,
+.mobile-menu-close:active {
+  background: rgba(45,93,224,0.08);
+}
+
+.mobile-menu-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.mobile-menu-links li {
   opacity: 0;
-  visibility: hidden;
-  transition: 0.4s;
+  transform: translateY(12px);
+  transition: opacity 0.3s, transform 0.3s;
 }
 
-.nav-mobile.active {
+.mobile-menu.open .mobile-menu-links li {
   opacity: 1;
-  visibility: visible;
+  transform: translateY(0);
 }
 
-.nav-mobile ul {
+.mobile-menu.open .mobile-menu-links li:nth-child(1) { transition-delay: 0.05s; }
+.mobile-menu.open .mobile-menu-links li:nth-child(2) { transition-delay: 0.1s; }
+.mobile-menu.open .mobile-menu-links li:nth-child(3) { transition-delay: 0.15s; }
+.mobile-menu.open .mobile-menu-links li:nth-child(4) { transition-delay: 0.2s; }
+.mobile-menu.open .mobile-menu-links li:nth-child(5) { transition-delay: 0.25s; }
+.mobile-menu.open .mobile-menu-links li:nth-child(6) { transition-delay: 0.3s; }
+
+.mobile-menu-links button {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  padding: 0.85rem 2rem;
+  border-radius: 10px;
+  transition: background 0.2s, color 0.2s;
+  letter-spacing: 0.03em;
+  background: none;
+  border: none;
+  cursor: pointer;
   text-align: center;
 }
 
-.nav-mobile li {
-  margin: 30px 0;
+.mobile-menu-links button:hover,
+.mobile-menu-links button:active {
+  background: rgba(45,93,224,0.08);
+  color: var(--accent);
 }
 
-.nav-mobile a {
-  font-size: 24px;
-  font-weight: 700;
+.mobile-menu-links .menu-label {
   font-family: 'Outfit', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--text-light);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: block;
+  margin-top: 0.1rem;
 }
 
 /* HERO CAROUSEL */
@@ -477,3 +583,4 @@ footer { padding: 60px 0; border-top: 1px solid var(--border); text-align: cente
   </script>
 </body>
 </html>
+
