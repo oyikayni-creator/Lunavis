@@ -42,7 +42,7 @@ img { max-width: 100%; display: block; }
   padding: 0 40px;
 }
 
-/* HEADER - ロゴ画像対応 */
+/* HEADER */
 header {
   height: 70px;
   background: rgba(255, 255, 255, 0.95);
@@ -65,7 +65,7 @@ header {
 }
 
 .logo img {
-  height: 40px; /* ロゴの高さ。バランスを見て調整してください */
+  height: 40px; 
   width: auto;
   display: block;
 }
@@ -85,7 +85,7 @@ header {
   color: var(--accent);
 }
 
-/* HERO CAROUSEL - かぶり防止 */
+/* HERO CAROUSEL */
 .hero-carousel {
   margin-top: 70px;
   position: relative;
@@ -94,8 +94,6 @@ header {
   min-height: 350px;
   overflow: hidden;
   background: var(--white);
-  /* 下のセクションとの間に隙間を確保 */
-  margin-bottom: 20px;
 }
 
 .hero-slide {
@@ -144,9 +142,6 @@ header {
 /* SECTION COMMON */
 section {
   padding: 100px 0;
-  position: relative;
-  z-index: 2;
-  background: var(--bg); /* 背景色を明示して重なりを防止 */
 }
 
 .section-title {
@@ -198,6 +193,13 @@ section {
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .product-tag {
@@ -209,6 +211,7 @@ section {
   font-size: 11px;
   font-weight: 700;
   color: white;
+  z-index: 10;
 }
 
 .product-info {
@@ -323,13 +326,11 @@ footer {
           <img src="keihopoker top-slide.jpg" alt="刑法ポーカー">
         </a>
       </div>
-
       <div class="hero-slide">
-        <img src="keihopoker2 top-slide.jpg" alt="刑法ポーカー2">
+        <img src="keihppoker2 top-slide" alt="刑法ポーカー2">
       </div>
-
       <div class="hero-slide">
-        <img src="syunkanninnpi top-slide.jpg" alt="瞬間認知">
+        <img src="syunkanninnpi top-slide" alt="瞬間認否">
       </div>
 
       <div class="carousel-nav">
@@ -361,7 +362,7 @@ footer {
           <div class="product-card" id="keiho1">
             <div class="product-image">
               <span class="product-tag" style="background: var(--keiho1-color);">Legal Strategy</span>
-              <img src="keihopoker top-slide.jpg" alt="刑法ポーカー">
+              <img src="IMG_2014.jpg" alt="刑法ポーカー">
             </div>
             <div class="product-info">
               <h3>刑法ポーカー</h3>
@@ -372,10 +373,10 @@ footer {
           <div class="product-card" id="keiho2">
             <div class="product-image">
               <span class="product-tag" style="background: var(--keiho2-color);">Coming Soon</span>
-              <img src="keihppoker2 top-slide" alt="刑法ポーカー2">
+              <img src="IMG_1673.jpg" alt="刑法ポーカー2">
             </div>
             <div class="product-info">
-              <h3>刑法ポーカー：拡張版</h3>
+              <h3>刑法ポーカー2</h3>
               <p>より高度な論点と戦略を追加。実戦的な事案解決能力を養うためのアップデートモデル。</p>
               <a href="#" class="btn-detail">詳細を見る →</a>
             </div>
@@ -383,10 +384,10 @@ footer {
           <div class="product-card" id="shunkan">
             <div class="product-image">
               <span class="product-tag" style="background: var(--shunkan-color);">Brain Training</span>
-              <img src="syunkanninnpi top-slide" alt="瞬間認知">
+              <img src="IMG_0675.jpg" alt="瞬間認否">
             </div>
             <div class="product-info">
-              <h3>瞬間認知</h3>
+              <h3>瞬間認否</h3>
               <p>視覚情報から瞬時に状況を判断する、脳トレを超えたタクティカル・トレーニングツール。</p>
               <a href="#" class="btn-detail">詳細を見る →</a>
             </div>
@@ -478,11 +479,4 @@ footer {
       
       setTimeout(() => {
         result.style.color = 'green';
-        result.textContent = 'お問い合わせありがとうございます。送信されました。';
-        btn.textContent = '送信完了';
-      }, 1500);
-    }
-  </script>
-</body>
-</html>
-
+        result.textContent = 'お問い合わせありがとうございます。送信
