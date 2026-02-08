@@ -30,6 +30,7 @@ body {
   color: var(--text);
   background-color: var(--bg);
   line-height: 1.7;
+  overflow-x: hidden;
 }
 
 a { text-decoration: none; color: inherit; transition: 0.3s; }
@@ -42,10 +43,46 @@ img { max-width: 100%; display: block; }
   padding: 0 40px;
 }
 
-/* HEADER */
+/* OPENING ANIMATION */
+#opening {
+  position: fixed;
+  inset: 0;
+  background: var(--ink);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1s ease, visibility 1s;
+}
+
+#opening.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.opening-logo {
+  font-family: 'Outfit', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.2em;
+  overflow: hidden;
+}
+
+.opening-logo span {
+  display: inline-block;
+  transform: translateY(100%);
+  animation: slideUp 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUp {
+  to { transform: translateY(0); }
+}
+
+/* HEADER - センターロゴ構成 */
 header {
   height: 70px;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
   position: fixed;
   top: 0;
@@ -53,36 +90,104 @@ header {
   width: 100%;
   z-index: 1000;
   border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
 }
 
 .header-inner {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* 中央配置 */
   align-items: center;
-  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.logo {
+  height: 40px;
+  transition: transform 0.3s;
+}
+
+.logo:active {
+  transform: scale(0.95);
 }
 
 .logo img {
-  height: 40px; 
+  height: 100%;
   width: auto;
-  display: block;
 }
 
-.nav-links {
+/* NAV - 左右に配置されるリンク（PC用） */
+.nav-desktop {
+  position: absolute;
+  width: 100%;
   display: flex;
-  gap: 32px;
+  justify-content: space-between;
+  pointer-events: none;
 }
 
-.nav-links a {
-  font-size: 14px;
-  font-weight: 500;
+.nav-desktop a {
+  pointer-events: auto;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   color: var(--text-light);
 }
 
-.nav-links a:hover {
-  color: var(--accent);
+/* HAMBURGER MENU */
+.menu-trigger {
+  position: absolute;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  z-index: 1100;
+}
+
+.menu-trigger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--ink);
+  transition: 0.3s;
+}
+
+.menu-trigger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.menu-trigger.active span:nth-child(2) { opacity: 0; }
+.menu-trigger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* MOBILE NAV OVERLAY */
+.nav-mobile {
+  position: fixed;
+  inset: 0;
+  background: var(--white);
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.4s;
+}
+
+.nav-mobile.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav-mobile ul {
+  text-align: center;
+}
+
+.nav-mobile li {
+  margin: 30px 0;
+}
+
+.nav-mobile a {
+  font-size: 24px;
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
 }
 
 /* HERO CAROUSEL */
@@ -90,7 +195,7 @@ header {
   margin-top: 70px;
   position: relative;
   width: 100%;
-  aspect-ratio: 21 / 9; 
+  aspect-ratio: 21 / 9;
   min-height: 350px;
   overflow: hidden;
   background: var(--white);
@@ -128,8 +233,8 @@ header {
 }
 
 .nav-dot {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.2);
   cursor: pointer;
@@ -140,163 +245,35 @@ header {
 }
 
 /* SECTION COMMON */
-section {
-  padding: 100px 0;
-}
-
-.section-title {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.section-title span {
-  display: block;
-  font-family: 'Outfit', sans-serif;
-  color: var(--accent);
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-
-.section-title h2 {
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--ink);
-}
+section { padding: 100px 0; }
+.section-title { text-align: center; margin-bottom: 60px; }
+.section-title span { display: block; font-family: 'Outfit', sans-serif; color: var(--accent); font-weight: 600; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+.section-title h2 { font-size: 32px; font-weight: 700; color: var(--ink); }
 
 /* PRODUCTS */
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-}
-
-.product-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-  transition: 0.4s;
-}
-
-.product-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-}
-
-.product-image {
-  aspect-ratio: 16/10;
-  background: #f0f0f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.product-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.product-tag {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 700;
-  color: white;
-  z-index: 10;
-}
-
-.product-info {
-  padding: 24px;
-}
-
-.product-info h3 {
-  font-size: 18px;
-  margin-bottom: 12px;
-}
-
-.product-info p {
-  font-size: 14px;
-  color: var(--text-light);
-  margin-bottom: 20px;
-}
-
-.btn-detail {
-  display: inline-flex;
-  align-items: center;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--accent);
-}
+.products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.product-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: 0.4s; }
+.product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+.product-image { aspect-ratio: 16/10; background: #f0f0f0; position: relative; overflow: hidden; }
+.product-image img { width: 100%; height: 100%; object-fit: cover; }
+.product-tag { position: absolute; top: 15px; left: 15px; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; color: white; z-index: 10; }
+.product-info { padding: 24px; }
+.product-info h3 { font-size: 18px; margin-bottom: 12px; }
+.product-info p { font-size: 14px; color: var(--text-light); margin-bottom: 20px; }
 
 /* CONTACT */
-.contact-section {
-  background: var(--warm);
-}
+.contact-section { background: var(--warm); }
+.contact-flex { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.form-group { margin-bottom: 24px; }
+.form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.form-group input, .form-group textarea { width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 6px; outline: none; }
+.submit-btn { background: var(--ink); color: var(--white); padding: 16px 40px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; width: 100%; }
 
-.contact-flex {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: start;
-}
-
-.form-group {
-  margin-bottom: 24px;
-}
-
-.form-group label {
-  display: block;
-  font-size: 13px;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.form-group input, .form-group textarea {
-  width: 100%;
-  padding: 14px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-family: inherit;
-  font-size: 15px;
-  outline: none;
-}
-
-.submit-btn {
-  background: var(--ink);
-  color: var(--white);
-  padding: 16px 40px;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  width: 100%;
-  transition: 0.3s;
-}
-
-.submit-btn:hover {
-  background: var(--accent);
-}
-
-footer {
-  padding: 60px 0;
-  border-top: 1px solid var(--border);
-  text-align: center;
-  font-size: 13px;
-  color: var(--text-light);
-}
+footer { padding: 60px 0; border-top: 1px solid var(--border); text-align: center; font-size: 13px; color: var(--text-light); }
 
 @media (max-width: 900px) {
+  .nav-desktop { display: none; }
   .products-grid, .contact-flex { grid-template-columns: 1fr; }
-  .nav-links { display: none; }
   .container { padding: 0 24px; }
   .hero-carousel { aspect-ratio: 16 / 9; }
 }
@@ -304,20 +281,33 @@ footer {
 </head>
 <body>
 
+  <div id="opening">
+    <div class="opening-logo">
+      <span>LUNAVIS</span>
+    </div>
+  </div>
+
   <header>
     <div class="container header-inner">
-      <div class="logo">
-        <a href="/">
-          <img src="lunavis logo.png" alt="LUNAVIS">
-        </a>
+      <a href="#" class="logo">
+        <img src="lunavis logo.png" alt="LUNAVIS">
+      </a>
+
+      <div class="menu-trigger" id="menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-      <nav class="nav-links">
-        <a href="#about">ABOUT</a>
-        <a href="#products">PRODUCTS</a>
-        <a href="#contact">CONTACT</a>
-      </nav>
     </div>
   </header>
+
+  <nav class="nav-mobile" id="mobile-nav">
+    <ul>
+      <li><a href="#about" class="nav-close">ABOUT</a></li>
+      <li><a href="#products" class="nav-close">PRODUCTS</a></li>
+      <li><a href="#contact" class="nav-close">CONTACT</a></li>
+    </ul>
+  </nav>
 
   <main>
     <section class="hero-carousel">
@@ -332,7 +322,6 @@ footer {
       <div class="hero-slide">
         <img src="syunkanninnpi top-slide" alt="瞬間認否">
       </div>
-
       <div class="carousel-nav">
         <div class="nav-dot active"></div>
         <div class="nav-dot"></div>
@@ -404,26 +393,14 @@ footer {
               <span>Contact</span>
               <h2>お問い合わせ</h2>
             </div>
-            <p style="color: var(--text-light); margin-bottom: 30px;">
-              製品に関するご質問、お取り扱いのご相談など、<br>
-              お気軽にお問い合わせください。
-            </p>
+            <p style="color: var(--text-light); margin-bottom: 30px;">製品に関するご質問などお気軽にお問い合わせください。</p>
           </div>
           <form onsubmit="event.preventDefault(); handleSubmit();">
-            <div class="form-group">
-              <label>お名前</label>
-              <input type="text" id="contact-name" placeholder="姓名">
-            </div>
-            <div class="form-group">
-              <label>メールアドレス</label>
-              <input type="email" id="contact-email" placeholder="example@mail.com">
-            </div>
-            <div class="form-group">
-              <label>お問い合わせ内容</label>
-              <textarea id="contact-message" rows="5" placeholder="ご質問内容を入力してください"></textarea>
-            </div>
+            <div class="form-group"><label>お名前</label><input type="text" id="contact-name"></div>
+            <div class="form-group"><label>メールアドレス</label><input type="email" id="contact-email"></div>
+            <div class="form-group"><label>お問い合わせ内容</label><textarea id="contact-message" rows="5"></textarea></div>
             <button type="submit" class="submit-btn" id="submit-btn">メッセージを送信</button>
-            <div id="form-result" style="margin-top: 15px; font-size: 14px;"></div>
+            <div id="form-result" style="margin-top: 15px;"></div>
           </form>
         </div>
       </div>
@@ -431,12 +408,37 @@ footer {
   </main>
 
   <footer>
-    <div class="container">
-      <p>&copy; 2024 Lunavis Co., Ltd. All rights reserved.</p>
-    </div>
+    <div class="container"><p>&copy; 2024 Lunavis Co., Ltd. All rights reserved.</p></div>
   </footer>
 
   <script>
+    // 1. Opening Animation
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('opening').classList.add('fade-out');
+      }, 1500);
+    });
+
+    // 2. Hamburger Menu Logic
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    const navCloses = document.querySelectorAll('.nav-close');
+
+    menuBtn.addEventListener('click', () => {
+      menuBtn.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+      document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+    });
+
+    navCloses.forEach(close => {
+      close.addEventListener('click', () => {
+        menuBtn.classList.remove('active');
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // 3. Carousel Logic
     (function() {
       const slides = document.querySelectorAll('.hero-slide');
       const dots = document.querySelectorAll('.nav-dot');
@@ -444,7 +446,6 @@ footer {
       let timer;
 
       function goTo(idx) {
-        if (!slides[idx]) return;
         slides[current].classList.remove('active');
         dots[current].classList.remove('active');
         current = idx;
@@ -452,31 +453,27 @@ footer {
         dots[current].classList.add('active');
       }
 
-      function next() {
-        goTo((current + 1) % slides.length);
-      }
-
-      function startTimer() {
-        clearInterval(timer);
-        timer = setInterval(next, 5000);
-      }
+      function next() { goTo((current + 1) % slides.length); }
+      function startTimer() { clearInterval(timer); timer = setInterval(next, 5000); }
 
       dots.forEach((dot, i) => {
-        dot.addEventListener('click', () => {
-          goTo(i);
-          startTimer();
-        });
+        dot.addEventListener('click', () => { goTo(i); startTimer(); });
       });
-
       startTimer();
     })();
 
+    // 4. Contact Form Simulation
     function handleSubmit() {
       const btn = document.getElementById('submit-btn');
       const result = document.getElementById('form-result');
       btn.disabled = true;
       btn.textContent = '送信中...';
-      
       setTimeout(() => {
         result.style.color = 'green';
-        result.textContent = 'お問い合わせありがとうございます。送信
+        result.textContent = 'お問い合わせを受け付けました。';
+        btn.textContent = '送信完了';
+      }, 1500);
+    }
+  </script>
+</body>
+</html>
